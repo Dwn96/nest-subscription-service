@@ -21,8 +21,8 @@ export class CustomersService {
     });
   }
 
-  async createCustomer(email: string) {
-    return this.customerRepository.create({ email });
+  async createCustomer(email: string, password: string) {
+    return this.customerRepository.create({ email, password });
   }
 
   async updateCustomer(id: number, customer: UpdateCustomerDto) {

@@ -29,6 +29,9 @@ export class CustomersController {
 
   @Post()
   async createCustomer(@Body() customer: CreateCustomerDto) {
-    return this.createCustomer(customer);
+    return this.createCustomer({
+      email: customer.email,
+      password: customer.password,
+    });
   }
 }

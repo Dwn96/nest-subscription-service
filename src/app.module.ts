@@ -7,6 +7,7 @@ import { CustomersService } from './customers/customers.service';
 import { DatabaseModule } from './database/database.module';
 import { SubscriptionsModule } from './subscriptions/subscriptions.module';
 import { CustomersModule } from './customers/customers.module';
+import { AuthModule } from './auth/auth.module';
 import * as Joi from 'joi';
 
 @Module({
@@ -20,11 +21,14 @@ import * as Joi from 'joi';
         POSTGRES_USER: Joi.string().required(),
         POSTGRES_PASSWORD: Joi.string().required().allow(null, ''),
         POSTGRES_DB: Joi.string().required(),
+        JWT_SECRET: Joi.string().required(),
+        JWT_EXP_H: Joi.string().required(),
       }),
     }),
     DatabaseModule,
     SubscriptionsModule,
     CustomersModule,
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [AppService],
