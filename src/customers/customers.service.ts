@@ -30,4 +30,10 @@ export class CustomersService {
   async updateCustomer(id: number, customer: UpdateCustomerDto) {
     return this.customerRepository.update(id, customer);
   }
+
+  async getCustomerByMail(email: string) {
+    return this.customerRepository.findOne({
+      where: { email },
+    });
+  }
 }

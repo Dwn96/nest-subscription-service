@@ -1,19 +1,20 @@
 import { Injectable } from '@nestjs/common';
 import { CustomersService } from '../customers/customers.service';
 import { CreateCustomerDto } from '../customers/dto/create-customer.dto';
+import * as bcrypt from 'bcrypt';
+import { ValidateUserDTO } from './dto/validate-user-dto';
 
 @Injectable()
 export class AuthService {
   constructor(private customerService: CustomersService) {}
 
   async validateUser(
-    id: number,
-    password: string,
+    payload: ValidateUserDTO,
   ): Promise<Omit<CreateCustomerDto, 'password'>> {
-    const user = await this.customerService.getCustomerById(id);
+    const { email, password } = payload;
 
-    if (user && user.password === password) {
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const user = await this.customerService.getCustomerByMail(email);
+    if (user && (await bcrypt.compare(password, user.password))) {
       const { password, ...rest } = user;
       return rest;
     }
