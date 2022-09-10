@@ -21,9 +21,10 @@ export class CustomersService {
     });
   }
 
-  async createCustomer(email: string, password: string) {
-    const entity = Object.assign(new Customer(), { email, password });
-    return this.customerRepository.save(entity);
+  async createCustomer(email: string, pass: string) {
+    const entity = Object.assign(new Customer(), { email, password: pass });
+    const { password, ...rest } = await this.customerRepository.save(entity);
+    return rest;
   }
 
   async updateCustomer(id: number, customer: UpdateCustomerDto) {
