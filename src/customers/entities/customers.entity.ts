@@ -1,12 +1,14 @@
 import { BeforeInsert, Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 import * as bcrypt from 'bcrypt';
 
-@Entity()
+@Entity('customers')
 class Customer {
   @PrimaryGeneratedColumn()
   public id: number;
 
-  @Column()
+  @Column({
+    // unique: true,
+  })
   public email: string;
 
   @Column()

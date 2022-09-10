@@ -22,7 +22,8 @@ export class CustomersService {
   }
 
   async createCustomer(email: string, password: string) {
-    return this.customerRepository.create({ email, password });
+    const entity = Object.assign(new Customer(), { email, password });
+    return this.customerRepository.save(entity);
   }
 
   async updateCustomer(id: number, customer: UpdateCustomerDto) {

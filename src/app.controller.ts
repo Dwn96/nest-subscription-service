@@ -1,4 +1,4 @@
-import { Controller, Get, Post, UseGuards } from '@nestjs/common';
+import { Controller, Get, Post, Request, UseGuards } from '@nestjs/common';
 import { AppService } from './app.service';
 import { LocalAuthGuard } from './auth/local-auth.guard';
 
@@ -8,8 +8,8 @@ export class AppController {
 
   @UseGuards(LocalAuthGuard)
   @Post('login')
-  login() {
-    return {};
+  login(@Request() req) {
+    return req;
   }
 
   @Get()
