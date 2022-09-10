@@ -8,8 +8,8 @@ export class AppController {
 
   @UseGuards(LocalAuthGuard)
   @Post('login')
-  login(@Request() req) {
-    return req.user;
+  login() {
+    return { msg: `Logged In! ` };
   }
 
   @Get()
